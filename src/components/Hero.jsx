@@ -1,5 +1,9 @@
 import React, { useRef, useState } from 'react'
 import Button from './Button'
+import { TiLocationArrow } from "react-icons/ti";
+import { useGSAP } from "@gsap/react";
+import gsap from 'gsap';
+
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(1)
@@ -24,6 +28,32 @@ const Hero = () => {
   }
 
 
+  useGSAP(()=>{
+    gsap.set('#next-video',{visibility:'visible'})
+    
+    gsap.to('#next-video',{
+      transformOrigin:'center center',
+      scale:1,
+      width:'100%',
+      height:'100%',
+      duration:1,
+      ease:'power1.inOut',
+      onStart:()=>videoRef.current.play(),
+    })
+
+    gsap.from('#current-video',{
+      transformOrigin:'center center',
+      scale:0,
+      duration:1.5,
+      ease:'power1.inOut',
+    
+    })
+
+  },{dependencies:[currentIndex],revertOnUpdate:true})
+
+  useGSAP(()=>{
+    
+  })
 
   const videoSrc=(idx)=>`videos/hero-${idx}.mp4`
   
@@ -64,16 +94,14 @@ const Hero = () => {
 
           <p className='mb-5 max-w-64 font-robert-regular text-white'>Enter the Metagame Layer <br/>Unleash the Play Economy</p>
 
-          <Button/>
+          <Button id="trailer" title="Watch Trailer" leftIcon={<TiLocationArrow/>} containerClass="bg-yellow-300 flex-center gap-1"/>
         </div>
         </div>
-        
-
-        
-        
-        
 
       </div>
+
+      <h1 className='hero-heading special-font absolute bottom-5 right-5 text-black'>G<b>a</b>ming</h1>
+
     </div>
   )
 }
