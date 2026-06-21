@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import gsap from "gsap";
-import { useWindowScroll } from "@uidotdev/usehooks";
+import { useWindowScroll } from "react-use";
 import { useEffect, useRef, useState } from "react";
 import { TiLocationArrow } from "react-icons/ti";
 
